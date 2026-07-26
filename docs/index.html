@@ -320,7 +320,7 @@
     <h2>Games</h2>
 
     <!-- ============ Shinobi ============ -->
-    <article class="game">
+    <article class="game" id="shinobi">
       <div class="game-head">
         <h3>Shinobi</h3>
         <span class="year">Sega, 1987 — System 16B</span>
@@ -367,6 +367,57 @@
         <span class="btn btn-soon">itch.io — coming soon</span>
       </div>
       <div class="sha mono"><b>SHA-256</b> ff0ab1466f8fbd890ab16796a25ee94ae0e082577ec41f2953b5cda85e646dbf</div>
+    </article>
+
+    <!-- ============ Alien Syndrome ============ -->
+    <article class="game" id="alien-syndrome">
+      <div class="game-head">
+        <h3>Alien Syndrome</h3>
+        <span class="year">Sega, 1987 — System 16B</span>
+      </div>
+      <div class="chips">
+        <span class="chip chip-aga">AGA build</span>
+        <span class="chip chip-rtg">RTG / P96 build</span>
+        <span class="chip chip-sys">ROM set: aliensyn</span>
+      </div>
+      <p>
+        Fight through infested space stations, rescue 10 comrades per stage and find
+        the exit before the time bomb detonates. The System 16B program runs natively
+        on your Amiga's CPU with the board's tile, sprite and priority model
+        reproduced, and the full arcade audio — music, SFX and the uPD7759 speech
+        samples — synthesized from your ROMs and played through Paula.
+      </p>
+
+      <div class="cols">
+        <div class="col">
+          <h4>In the bundle</h4>
+          <ul>
+            <li><code>AlienSyndrome</code> — AGA executable (native screens: real A1200/A4000, Amiberry AGA configs)</li>
+            <li><code>AlienSyndromeRTG</code> — RTG/Picasso96 executable (Pimiga and other RTG-first setups)</li>
+            <li><code>BuildPack</code> — one-time tool that renders the soundtrack from your ROMs</li>
+            <li><code>docs/ROM_FILES.txt</code> — exact ROM filenames with SHA-256 checksums</li>
+            <li>Empty <code>roms/aliensyn/</code> folder — you fill this</li>
+          </ul>
+        </div>
+        <div class="col">
+          <h4>System requirements</h4>
+          <ul>
+            <li><strong>A1200-class AGA Amiga</strong> (A1200/A4000)</li>
+            <li><strong>68040-level CPU recommended</strong> — PiStorm and accelerated machines qualify; a stock A1200 does not</li>
+            <li>64&nbsp;MB fast RAM, Kickstart 3.0+</li>
+            <li><strong>Amiberry and Pimiga supported</strong> (use the RTG build on Pimiga)</li>
+            <li>Best at 60&nbsp;Hz (NTSC-capable display or emulator)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="dl-row">
+        <a class="btn btn-primary" href="https://github.com/CrownParkComputing/WhittyArcadeAmiga-Releases/raw/main/AlienSyndrome/AlienSyndrome-Amiga.zip" download>Download AlienSyndrome-Amiga.zip <small>(694&nbsp;KB)</small></a>
+        <a class="btn btn-ghost" href="https://github.com/CrownParkComputing/WhittyArcadeAmiga-Releases/raw/main/AlienSyndrome/SHA256SUMS" download>SHA256SUMS</a>
+        <!-- TODO: replace with the real itch.io page URL when it exists -->
+        <span class="btn btn-soon">itch.io — coming soon</span>
+      </div>
+      <div class="sha mono"><b>SHA-256</b> b186c3bfc91c8161a2658cc18e7546bb3327b0a65fc1933e1a1576a76d0e7caf</div>
     </article>
 
   </div>
