@@ -6,11 +6,14 @@ soundtrack rendered from your own ROMs.
 
 ## Downloads
 
-| Game | Bundle | Requirements |
-|---|---|---|
-| Shinobi (Sega, 1987) | [`Shinobi/Shinobi-Amiga.zip`](Shinobi/Shinobi-Amiga.zip) | 68040-class CPU, 64MB fast RAM, Kickstart 3.0+ |
+Downloads are distributed through
+[CrownParkComputing on itch.io](https://crownparkcomputing.itch.io/).
+The bundles are not served from this GitHub page.
 
-Checksums: `SHA256SUMS` next to each bundle.
+| Game | Download | Requirements |
+|---|---|---|
+| Shinobi (Sega, 1987) | [Get it on itch.io](https://crownparkcomputing.itch.io/shinobi-amiga) | 68040-class CPU, 64MB fast RAM, Kickstart 3.0+ |
+| Alien Syndrome (Sega, 1987) | [CrownParkComputing on itch.io](https://crownparkcomputing.itch.io/) | 68040-class CPU, 64MB fast RAM, Kickstart 3.0+ |
 
 ## What's in a bundle -- and what is not
 
