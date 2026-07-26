@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>WhittyArcade Amiga — Arcade Ports for the Amiga</title>
-<meta name="description" content="Sega System 16B arcade games ported to the Amiga. Original 68000 arcade code on your machine, AGA and RTG builds, ROM-free bundles.">
+<meta name="description" content="Classic arcade games ported to the Amiga. Original 68000 arcade code on your machine, AGA and RTG builds, ROM-free bundles.">
 <style>
   :root {
     --bg: #07070f;
@@ -408,6 +408,55 @@
       <div class="dl-row">
         <a class="btn btn-primary" href="https://crownparkcomputing.itch.io/">Find Alien Syndrome on itch.io</a>
       </div>
+    </article>
+
+    <!-- ============ Chase H.Q. ============ -->
+    <article class="game" id="chase-hq">
+      <div class="game-head">
+        <h3>Chase H.Q.</h3>
+        <span class="year">Taito, 1988 — Z System</span>
+      </div>
+      <div class="chips">
+        <span class="chip chip-rtg">RTG / P96 build</span>
+        <span class="chip chip-sys">ROM set: chasehq</span>
+      </div>
+      <p>
+        Run the suspect down and ram his car off the road before the timer expires.
+        The original dual-68000 Taito Z program runs natively on your Amiga's CPU,
+        with the board's TC0100SCN tile and TC0150ROD road hardware rendered
+        MAME-pixel-verified at the full 320x240 arcade picture. Full arcade audio —
+        music, SFX and radio speech — is rendered from your ROMs, with the engine
+        note on genuine Paula hardware, its pitch tracking your speed.
+      </p>
+
+      <div class="cols">
+        <div class="col">
+          <h4>In the bundle</h4>
+          <ul>
+            <li><code>ChaseHQ</code> — RTG/Picasso96 executable (opens its own 864x486 screen)</li>
+            <li><code>BuildPack</code> — one-time tool that renders the soundtrack from your ROMs (slow: over an hour on a 68040 — worth the coffee break)</li>
+            <li><code>docs/ROM_FILES.txt</code> — exact ROM filenames with SHA-256 checksums</li>
+            <li>Empty <code>roms/chasehq/</code> folder — you fill this (22 files)</li>
+          </ul>
+        </div>
+        <div class="col">
+          <h4>System requirements</h4>
+          <ul>
+            <li><strong>RTG (Picasso96/CyberGraphX) display required</strong> — Pimiga, Amiberry and PiStorm RTG setups qualify; a stock AGA A1200 does not</li>
+            <li><strong>68040-level CPU</strong>, 64&nbsp;MB fast RAM</li>
+            <li>Kickstart 3.0+</li>
+            <li>Holds the arcade's 60&nbsp;Hz pacing with frame-skip under load</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="dl-row">
+        <a class="btn btn-primary" href="https://github.com/CrownParkComputing/WhittyArcadeAmiga-Releases/raw/main/ChaseHQ/ChaseHQ-Amiga.zip" download>Download ChaseHQ-Amiga.zip <small>(280&nbsp;KB)</small></a>
+        <a class="btn btn-ghost" href="https://github.com/CrownParkComputing/WhittyArcadeAmiga-Releases/raw/main/ChaseHQ/SHA256SUMS" download>SHA256SUMS</a>
+        <!-- TODO: replace this row with the real itch.io page URL when it exists -->
+        <span class="btn btn-soon">itch.io — coming soon</span>
+      </div>
+      <div class="sha mono"><b>SHA-256</b> 3397f538d5c9dcb76f409a0febf138a383863ac5b85460fbe48bb7cfc4c19218</div>
     </article>
 
   </div>

@@ -1,0 +1,4 @@
+TODO: capture with Amiberry screenshot key (no assets exist yet).
+- cover-630x500.png  (title art, 630x500)
+- screen1-title.png, screen2-... (320x240 gameplay scaled 2x nearest-neighbour to 640x480)
+See ../PAGE.md "Screenshots & cover" for the wanted shot list.
