@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WhittyArcade Amiga — Arcade Ports for the Amiga</title>
+<meta name="description" content="Sega System 16B arcade games ported to the Amiga. Original 68000 arcade code on your machine, AGA and RTG builds, ROM-free bundles.">
+<style>
+  :root {
+    --bg: #07070f;
+    --bg-card: #0e0e1c;
+    --bg-card2: #121224;
+    --ink: #e8e8f2;
+    --ink-dim: #9d9db4;
+    --cyan: #3ee6ff;
+    --magenta: #ff3e9d;
+    --amber: #ffc857;
+    --line: #232342;
+    --ok: #5ce87f;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: ui-sans-serif, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  /* subtle CRT scanlines over the whole page */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+      to bottom,
+      rgba(255,255,255,0.018) 0px,
+      rgba(255,255,255,0.018) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+    z-index: 999;
+  }
+  code, .mono { font-family: ui-monospace, "Cascadia Mono", "JetBrains Mono", Menlo, Consolas, monospace; }
+
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 20px; }
+
+  /* ---------- header ---------- */
+  header {
+    padding: 72px 0 56px;
+    text-align: center;
+    background:
+      radial-gradient(ellipse 70% 55% at 50% -10%, rgba(62,230,255,0.13), transparent 70%),
+      radial-gradient(ellipse 55% 45% at 50% 110%, rgba(255,62,157,0.09), transparent 70%);
+    border-bottom: 1px solid var(--line);
+  }
+  .marquee {
+    display: inline-block;
+    padding: 6px 18px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    color: var(--cyan);
+    font-size: 0.78rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    margin-bottom: 26px;
+  }
+  h1 {
+    font-family: ui-monospace, "Cascadia Mono", Menlo, Consolas, monospace;
+    font-size: clamp(2rem, 6.5vw, 3.6rem);
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    line-height: 1.15;
+  }
+  h1 .wa { color: var(--ink); text-shadow: 0 0 24px rgba(62,230,255,0.35); }
+  h1 .amiga {
+    background: linear-gradient(90deg, var(--cyan), var(--magenta));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .tagline {
+    margin-top: 18px;
+    color: var(--ink-dim);
+    font-size: 1.08rem;
+    max-width: 620px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .tagline strong { color: var(--ink); font-weight: 600; }
+  .header-links { margin-top: 30px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+  /* ---------- buttons ---------- */
+  .btn {
+    display: inline-block;
+    padding: 12px 26px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
+    border: 1px solid transparent;
+  }
+  .btn:active { transform: translateY(1px); }
+  .btn-primary {
+    background: var(--cyan);
+    color: #041018;
+    box-shadow: 0 0 22px rgba(62,230,255,0.28);
+  }
+  .btn-primary:hover { box-shadow: 0 0 34px rgba(62,230,255,0.5); }
+  .btn-ghost {
+    background: transparent;
+    color: var(--ink);
+    border-color: var(--line);
+  }
+  .btn-ghost:hover { border-color: var(--cyan); color: var(--cyan); }
+  .btn-soon {
+    background: transparent;
+    color: var(--ink-dim);
+    border: 1px dashed var(--line);
+    cursor: default;
+  }
+  .btn small { font-weight: 400; opacity: 0.75; }
+
+  /* ---------- sections ---------- */
+  section { padding: 56px 0; }
+  h2 {
+    font-family: ui-monospace, "Cascadia Mono", Menlo, Consolas, monospace;
+    font-size: 1.5rem;
+    letter-spacing: 0.06em;
+    margin-bottom: 24px;
+  }
+  h2::before { content: "» "; color: var(--magenta); }
+
+  /* ---------- ROM policy notice ---------- */
+  .notice {
+    border: 1px solid rgba(255,200,87,0.4);
+    background: linear-gradient(180deg, rgba(255,200,87,0.07), rgba(255,200,87,0.02));
+    border-radius: 12px;
+    padding: 22px 26px;
+  }
+  .notice h3 {
+    color: var(--amber);
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    margin-bottom: 10px;
+  }
+  .notice p { color: var(--ink-dim); font-size: 0.97rem; }
+  .notice p + p { margin-top: 8px; }
+  .notice strong { color: var(--ink); }
+  .notice code {
+    background: rgba(255,255,255,0.06);
+    padding: 2px 7px;
+    border-radius: 5px;
+    font-size: 0.88em;
+    color: var(--amber);
+  }
+
+  /* ---------- game cards ---------- */
+  .game {
+    background: linear-gradient(180deg, var(--bg-card2), var(--bg-card));
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 30px 32px;
+    margin-bottom: 32px;
+  }
+  .game-head {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-bottom: 4px;
+  }
+  .game h3 {
+    font-family: ui-monospace, "Cascadia Mono", Menlo, Consolas, monospace;
+    font-size: 1.65rem;
+    color: var(--ink);
+    text-shadow: 0 0 18px rgba(255,62,157,0.3);
+  }
+  .game .year { color: var(--ink-dim); font-size: 0.95rem; }
+  .chips { display: flex; gap: 8px; flex-wrap: wrap; margin: 14px 0 18px; }
+  .chip {
+    font-family: ui-monospace, Menlo, Consolas, monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 999px;
+    border: 1px solid;
+  }
+  .chip-aga { color: var(--cyan); border-color: rgba(62,230,255,0.45); background: rgba(62,230,255,0.07); }
+  .chip-rtg { color: var(--magenta); border-color: rgba(255,62,157,0.45); background: rgba(255,62,157,0.07); }
+  .chip-sys { color: var(--ink-dim); border-color: var(--line); }
+  .game > p { color: var(--ink-dim); margin-bottom: 18px; }
+  .game > p strong { color: var(--ink); }
+
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-bottom: 22px; }
+  @media (max-width: 640px) { .cols { grid-template-columns: 1fr; } }
+  .col h4 {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--cyan);
+    margin-bottom: 10px;
+  }
+  .col ul { list-style: none; }
+  .col li {
+    color: var(--ink-dim);
+    font-size: 0.93rem;
+    padding: 4px 0 4px 20px;
+    position: relative;
+  }
+  .col li::before { content: "▸"; position: absolute; left: 0; color: var(--magenta); }
+  .col li code {
+    background: rgba(255,255,255,0.06);
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-size: 0.87em;
+    color: var(--ink);
+  }
+  .col li strong { color: var(--ink); font-weight: 600; }
+
+  .dl-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; margin-bottom: 14px; }
+  .sha {
+    font-size: 0.76rem;
+    color: var(--ink-dim);
+    word-break: break-all;
+    background: rgba(0,0,0,0.35);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 10px 14px;
+  }
+  .sha b { color: var(--ok); font-weight: 600; }
+
+  /* ---------- how it works ---------- */
+  .steps { list-style: none; counter-reset: step; }
+  .steps li {
+    counter-increment: step;
+    position: relative;
+    padding: 0 0 22px 58px;
+    color: var(--ink-dim);
+  }
+  .steps li strong { color: var(--ink); }
+  .steps li::before {
+    content: counter(step, decimal-leading-zero);
+    position: absolute;
+    left: 0; top: 0;
+    font-family: ui-monospace, Menlo, Consolas, monospace;
+    font-weight: 800;
+    color: var(--magenta);
+    font-size: 1.1rem;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    width: 42px; height: 42px;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--bg-card);
+  }
+  .steps code {
+    background: rgba(255,255,255,0.06);
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-size: 0.88em;
+    color: var(--cyan);
+  }
+
+  /* ---------- footer ---------- */
+  footer {
+    border-top: 1px solid var(--line);
+    padding: 38px 0 48px;
+    text-align: center;
+    color: var(--ink-dim);
+    font-size: 0.88rem;
+  }
+  footer a { color: var(--cyan); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+  footer p + p { margin-top: 8px; }
+
+  a:focus-visible, .btn:focus-visible { outline: 2px solid var(--cyan); outline-offset: 3px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="marquee">Insert Coin</div>
+    <h1><span class="wa">WhittyArcade</span> <span class="amiga">Amiga</span></h1>
+    <p class="tagline">
+      Arcade classics running natively on the Amiga — the <strong>original 68000 arcade
+      code</strong> executing on your machine, the original board's video model, and the
+      arcade soundtrack rendered from your own ROMs.
+    </p>
+    <div class="header-links">
+      <a class="btn btn-primary" href="#games">Download the Games</a>
+      <a class="btn btn-ghost" href="https://github.com/CrownParkComputing/WhittyArcadeAmiga-Releases">View on GitHub</a>
+      <!-- TODO: replace href with the real itch.io page URL when it exists -->
+      <span class="btn btn-soon">Also on itch.io — coming soon</span>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="notice">
+      <h3>ROM Policy — read first</h3>
+      <p><strong>These bundles contain no arcade ROMs and no ROM-derived data.</strong>
+      You must own each game's arcade ROMs and supply them yourself, legally obtained.</p>
+      <p>Copy the required files from the game's merged MAME ROM set, flattened into the
+      bundle's <code>roms/&lt;set&gt;/</code> folder (exact filenames and SHA-256 checksums
+      are listed in each bundle's <code>docs/ROM_FILES.txt</code>). The loader verifies
+      them at startup and reports any mismatch on screen.</p>
+    </div>
+  </div>
+</section>
+
+<section id="games">
+  <div class="wrap">
+    <h2>Games</h2>
+
+    <!-- ============ Shinobi ============ -->
+    <article class="game">
+      <div class="game-head">
+        <h3>Shinobi</h3>
+        <span class="year">Sega, 1987 — System 16B</span>
+      </div>
+      <div class="chips">
+        <span class="chip chip-aga">AGA build</span>
+        <span class="chip chip-rtg">RTG / P96 build</span>
+        <span class="chip chip-sys">ROM set: shinobi6</span>
+      </div>
+      <p>
+        Joe Musashi's one-man war on the Zeed syndicate, ported straight from the arcade
+        board. The System 16B program runs natively on your Amiga's CPU with the board's
+        tile, sprite and priority model reproduced, and the full Z80 + YM2151 + uPD7759
+        soundtrack synthesized from your ROMs and played through Paula.
+      </p>
+
+      <div class="cols">
+        <div class="col">
+          <h4>In the bundle</h4>
+          <ul>
+            <li><code>Shinobi</code> — AGA executable (native screens: real A1200/A4000, Amiberry AGA configs)</li>
+            <li><code>ShinobiRTG</code> — RTG/Picasso96 executable (Pimiga and other RTG-first setups)</li>
+            <li><code>BuildPack</code> — one-time tool that renders the soundtrack from your ROMs</li>
+            <li><code>docs/ROM_FILES.txt</code> — exact ROM filenames with SHA-256 checksums</li>
+            <li>Empty <code>roms/shinobi6/</code> folder — you fill this</li>
+          </ul>
+        </div>
+        <div class="col">
+          <h4>System requirements</h4>
+          <ul>
+            <li><strong>A1200-class AGA Amiga</strong> (A1200/A4000)</li>
+            <li><strong>68040-level CPU recommended</strong> — PiStorm and accelerated machines qualify; a stock A1200 does not</li>
+            <li>64&nbsp;MB fast RAM, Kickstart 3.0+</li>
+            <li><strong>Amiberry and Pimiga supported</strong> (use the RTG build on Pimiga)</li>
+            <li>Best at 60&nbsp;Hz (NTSC-capable display or emulator)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="dl-row">
+        <a class="btn btn-primary" href="https://github.com/CrownParkComputing/WhittyArcadeAmiga-Releases/raw/main/Shinobi/Shinobi-Amiga.zip" download>Download Shinobi-Amiga.zip <small>(684&nbsp;KB)</small></a>
+        <a class="btn btn-ghost" href="https://github.com/CrownParkComputing/WhittyArcadeAmiga-Releases/raw/main/Shinobi/SHA256SUMS" download>SHA256SUMS</a>
+        <!-- TODO: replace with the real itch.io page URL when it exists -->
+        <span class="btn btn-soon">itch.io — coming soon</span>
+      </div>
+      <div class="sha mono"><b>SHA-256</b> ff0ab1466f8fbd890ab16796a25ee94ae0e082577ec41f2953b5cda85e646dbf</div>
+    </article>
+
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>How it works</h2>
+    <ol class="steps">
+      <li><strong>Unpack the bundle</strong> onto any Amiga drive, or mount the folder as a directory in your emulator.</li>
+      <li><strong>Add your ROMs.</strong> Copy the files listed in <code>docs/ROM_FILES.txt</code> from your legally obtained merged MAME ROM set into <code>roms/&lt;set&gt;/</code> — flattened, by filename, regardless of the zip's internal subfolders.</li>
+      <li><strong>Run <code>BuildPack</code> once.</strong> It renders the entire soundtrack from your ROMs — the same Z80 + FM + ADPCM sound board the arcade ran — and writes the sound pack next to the game. Takes a few minutes; never needs to run again.</li>
+      <li><strong>Play.</strong> Run the AGA executable on native-screen machines, or the RTG executable on Picasso96 environments such as Pimiga. Joystick or CD32 pad in port 2; full controls in each bundle's README.</li>
+    </ol>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>Releases and checksums live in the
+      <a href="https://github.com/CrownParkComputing/WhittyArcadeAmiga-Releases">WhittyArcadeAmiga-Releases</a>
+      repository on GitHub.</p>
+    <p>No arcade ROMs are distributed here. All game titles and trademarks are the
+      property of their respective owners.</p>
+    <p>A CrownParkComputing production.</p>
+  </div>
+</footer>
+
+</body>
+</html>
