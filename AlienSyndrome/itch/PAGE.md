@@ -134,7 +134,7 @@ app try to install/launch it.
 
 - Upload `AlienSyndrome-Amiga.zip` (the file from this repo's
   `AlienSyndrome/` folder, SHA-256
-  `b186c3bfc91c8161a2658cc18e7546bb3327b0a65fc1933e1a1576a76d0e7caf`).
+  `9578f5f1c9286328c1242afc651a6794ed78d1c2a344c11fc8827f0bf4c13d56`).
 - Display name: `AlienSyndrome-Amiga.zip — AGA + RTG builds (no ROMs included)`
 - Under the upload's platform checkboxes: tick **nothing** (leave it as a
   plain downloadable file).
