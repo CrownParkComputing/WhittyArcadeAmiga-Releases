@@ -154,3 +154,8 @@ app try to install/launch it.
 
 <!-- TODO: after publishing, put the live itch.io URL here and update the
      "coming soon" buttons in docs/index.html -->
+
+## Assets (in this folder)
+
+- `assets/cover-630x500.png` — upload as the project cover image.
+- `assets/screen*.png` — upload as the screenshots, in number order.
