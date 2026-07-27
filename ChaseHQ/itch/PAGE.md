@@ -140,7 +140,7 @@ make the itch app try to install/launch it.
 
 - Upload `ChaseHQ-Amiga.zip` (the file from this repo's `ChaseHQ/` folder,
   SHA-256
-  `3397f538d5c9dcb76f409a0febf138a383863ac5b85460fbe48bb7cfc4c19218`).
+  `0743eaa56bbb7afe5f6302082bf13095e889cfd76bd28ecd3a6a4296b0084040`).
 - Display name: `ChaseHQ-Amiga.zip — RTG build (no ROMs included)`
 - Under the upload's platform checkboxes: tick **nothing** (leave it as a
   plain downloadable file).
